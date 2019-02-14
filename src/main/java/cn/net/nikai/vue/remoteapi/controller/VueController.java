@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @Modified By:
  */
 @RestController
+//@CrossOrigin(allowCredentials = "true",maxAge = 3600)
 public class VueController {
 
     @GetMapping("/user/info")
