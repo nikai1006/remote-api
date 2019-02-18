@@ -4,6 +4,8 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.jiatui.spi.ServiceResponse;
 import java.util.Arrays;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,6 +24,8 @@ import org.springframework.web.bind.annotation.RestController;
 //@CrossOrigin(allowCredentials = "true",maxAge = 3600)
 public class VueController {
 
+    public static final Logger log = LoggerFactory.getLogger(VueController.class);
+
     @GetMapping("/user/info")
     @ResponseBody
     public User queryUserInfo(String token) {
@@ -35,9 +39,10 @@ public class VueController {
 
     @PostMapping("/login")
     @ResponseBody
-    public ServiceResponse login(@RequestBody LoginDTO loginDTO) {
-
-        return new ServiceResponse(200, "success");
+    public User login(@RequestBody LoginDTO loginDTO) {
+        log.info(loginDTO.toString());
+//        return new ServiceResponse(200, "success",queryUserInfo("admin"));
+        return queryUserInfo(loginDTO.getUsername());
     }
 
     @PostMapping("/login/logout")
